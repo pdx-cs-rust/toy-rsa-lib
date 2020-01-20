@@ -20,12 +20,13 @@ pub fn modexp(x: u64, y: u64, m: u64) -> u64 {
         return 1 % m;
     }
     let z = modexp(x, y / 2, m);
-    let z = (z * z) % m;
-    if y % 2 == 1 {
-        ((z % m) * (x % m)) % m
+    let z = ((z as u128) * (z as u128)) % m as u128;
+    let z = if y % 2 == 1 {
+        (z * x as u128) % m as u128
     } else {
         z
-    }
+    };
+    u64::try_from(z).unwrap()
 }
 
 #[test]
