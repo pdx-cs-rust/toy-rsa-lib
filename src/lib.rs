@@ -119,7 +119,7 @@ pub fn modinverse(a: u64, m: u64) -> u64 {
 pub fn rsa_prime() -> u64 {
     use rand::Rng;
     let mut rng = rand::thread_rng();
-    let max = u64::from(u16::max_value()) / 2;
+    let max = u64::from(u32::max_value()) / 2;
     let min = max / 2;
     loop {
         let p = rng.gen_range(min, max) | 1;
