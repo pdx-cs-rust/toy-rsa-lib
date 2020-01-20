@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["check","Checks if number is a safe prime"],["from_rng","Constructs a new `SafePrime` with the size of `bit_length` bits, sourced from an already-initialized `Rng`."],["new","Constructs a new safe prime number with a size of `bit_length` bits."],["strong_check","Checks if number is a safe prime using the Baillie-PSW test"]]});
