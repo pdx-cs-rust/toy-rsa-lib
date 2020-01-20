@@ -12,7 +12,7 @@ use std::convert::TryFrom;
 /// # Panics
 /// Will panic if `m` is 0 or greater than `2**32-1`.
 pub fn modexp(x: u64, y: u64, m: u64) -> u64 {
-    assert!(m > 0 && m <= u64::from(u32::max_value()));
+    assert!(m > 0);
     if x == 0 {
         return 0;
     }
@@ -22,7 +22,7 @@ pub fn modexp(x: u64, y: u64, m: u64) -> u64 {
     let z = modexp(x, y / 2, m);
     let z = (z * z) % m;
     if y % 2 == 1 {
-        (z * (x % m)) % m
+        ((z % m) * (x % m)) % m
     } else {
         z
     }
