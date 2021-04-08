@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["error","Error structs"],["prime","Generates cryptographically secure prime numbers."],["safe_prime","Generates cryptographically secure safe prime numbers."]]});
