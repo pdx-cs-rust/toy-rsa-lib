@@ -138,7 +138,7 @@ pub fn rsa_prime() -> u32 {
     let max = u32::max_value();
     let min = max / 2;
     loop {
-        let p = rng.gen_range(min, max) | 1;
+        let p = rng.gen_range(min..=max) | 1;
         let bp = num_bigint::BigUint::from(p);
         if glass_pumpkin::prime::strong_check(&bp) {
             return p;
