@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["check","Test if number is prime by"],["from_rng","Create a new prime number with size `bit_length` sourced from an already-initialized `Rng`"],["new","Constructs a new prime number with a size of `bit_length` bits."],["strong_check","Checks if number is a prime using the Baillie-PSW test"]]});
