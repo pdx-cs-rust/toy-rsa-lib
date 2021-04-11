@@ -279,7 +279,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m0</span>, <span class="ident">m</span>);
 }
 
-<span class="doccomment">/// Produce a prime in the range `2**30`…`2**31` suitable</span>
+<span class="doccomment">/// Produce a prime in the range `2**30..2**31-1` suitable</span>
 <span class="doccomment">/// for use in RSA.</span>
 <span class="comment">// Strategy: try random integers in-range forced to odd</span>
 <span class="comment">// until one of them passes the `strong_check()` test.</span>
@@ -289,7 +289,7 @@
     <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">u32</span>::<span class="ident">max_value</span>();
     <span class="kw">let</span> <span class="ident">min</span> <span class="op">=</span> <span class="ident">max</span> <span class="op">/</span> <span class="number">2</span>;
     <span class="kw">loop</span> {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="ident">min</span>..<span class="op">=</span><span class="ident">max</span>) <span class="op">|</span> <span class="number">1</span>;
+        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="ident">min</span>..<span class="ident">max</span><span class="op">-</span><span class="number">1</span>) <span class="op">|</span> <span class="number">1</span>;
         <span class="kw">let</span> <span class="ident">bp</span> <span class="op">=</span> <span class="ident">num_bigint</span>::<span class="ident">BigUint</span>::<span class="ident">from</span>(<span class="ident">p</span>);
         <span class="kw">if</span> <span class="ident">glass_pumpkin</span>::<span class="ident">prime</span>::<span class="ident">strong_check</span>(<span class="kw-2">&amp;</span><span class="ident">bp</span>) {
             <span class="kw">return</span> <span class="ident">p</span>;
