@@ -135,10 +135,10 @@ fn test_modinverse() {
 pub fn rsa_prime() -> u32 {
     use rand::Rng;
     let mut rng = rand::thread_rng();
-    let max = u32::max_value();
-    let min = max / 2;
+    let max = 1u32 << 31;
+    let min = max >> 1;
     loop {
-        let p = rng.gen_range(min..max-1) | 1;
+        let p = rng.gen_range(min..max - 1) | 1;
         let bp = num_bigint::BigUint::from(p);
         if glass_pumpkin::prime::strong_check(&bp) {
             return p;
