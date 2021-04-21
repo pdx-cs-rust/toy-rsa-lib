@@ -148,7 +148,7 @@ pub fn rsa_prime() -> u32 {
 
 #[test]
 fn test_rsa_prime() {
-    for _ in 0..100_000 {
+    for _ in 0..10_000 {
         let p = rsa_prime();
         assert!(p >= (1 << 30) && p <= ((1 << 31) - 1));
     }
