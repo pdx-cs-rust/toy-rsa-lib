@@ -1,6 +1,6 @@
 [package]
 name = "toy_rsa_lib"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Bart Massey <bart.massey@gmail.com>"]
 edition = "2021"
 

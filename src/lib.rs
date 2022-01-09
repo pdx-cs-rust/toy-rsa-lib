@@ -10,26 +10,27 @@ use std::convert::TryFrom;
 // https://primes.utm.edu/lists/2small/0bit.html
 const BIGM: u64 = u64::max_value() - 58;
 
-/// Efficiently compute `x**y mod m`. Uses the standard
-/// approach of repeated squaring with adjustments.  `O(lg
-/// y)` runtime.
+/// Efficiently compute `x**y mod m`.
+/// `O(lg y)` runtime.
 ///
 /// # Panics
 /// Will panic if `m` is 0.
-pub fn modexp(x: u64, y: u64, m0: u64) -> u64 {
-    assert!(m0 > 0);
-    let m = m0 as u128;
-    let x = x as u128;
-    let y = y as u128;
-    if x == 0 {
+pub fn modexp(x: u64, y: u64, m: u64) -> u64 {
+    assert!(m > 0);
+    if m == 1 {
         return 0;
     }
-    if y == 0 {
-        return 1 % m0;
+    let mut x = u128::from(x);
+    let mut y = u128::from(y);
+    let m = u128::from(m);
+    let mut z = 1;
+    while y > 0 {
+        if y % 2 == 1 {
+            z = (z * x) % m;
+        }
+        x = (x * x) % m;
+        y /= 2;
     }
-    let z = modexp(x as u64, (y / 2) as u64, m as u64) as u128;
-    let z = (z * z) % m;
-    let z = if y % 2 == 1 { (z * x) % m } else { z };
     u64::try_from(z).unwrap()
 }
 
