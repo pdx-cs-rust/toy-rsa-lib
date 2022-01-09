@@ -128,17 +128,16 @@ fn test_modinverse() {
     assert_eq!(m0, m);
 }
 
-/// Produce a prime in the range `2**30..=2**31-1` suitable
+/// Produce a prime in the range `2**31..=2**32-1` suitable
 /// for use in RSA.
 // Strategy: try random integers in-range forced to odd
 // until one of them passes the `strong_check()` test.
 pub fn rsa_prime() -> u32 {
     use rand::Rng;
     let mut rng = rand::thread_rng();
-    let max = 1u32 << 31;
-    let min = max >> 1;
+    let min = 1 << 31;
     loop {
-        let p = rng.gen_range(min..max - 1) | 1;
+        let p = rng.gen_range(min..=u32::MAX) | 1;
         let bp = num_bigint::BigUint::from(p);
         if glass_pumpkin::prime::strong_check(&bp) {
             return p;
@@ -148,8 +147,8 @@ pub fn rsa_prime() -> u32 {
 
 #[test]
 fn test_rsa_prime() {
-    for _ in 0..10_000 {
+    for _ in 0..100 {
         let p = rsa_prime();
-        assert!(p >= (1 << 30) && p <= ((1 << 31) - 1));
+        assert!(p >= 1 << 31);
     }
 }
